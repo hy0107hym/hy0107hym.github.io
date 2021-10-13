@@ -41,7 +41,7 @@
 
                 <!-- .nav -->
             </div>
-
+            <section>
             <div id="slider">
                 <div class="text-content">
                     <h2 class="text-heading">New York</h2>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-
+            </section>
             <div id="content">
                 <!-- About section -->
                 <div id="band" class="content-section">
@@ -133,9 +133,7 @@
                                         Praesent tincidunt sed tellus ut rutrum
                                         sed vitae justo.
                                     </p>
-                                    <a href="#" class="btn s-full-width"
-                                        >Buy tickets</a
-                                    >
+                                    <button class="btn js-buy-ticket">Buy Tickets</button>
                                 </div>
                             </div>
                             <div class="col col-third s-col-full mt-16">
@@ -151,9 +149,7 @@
                                         Praesent tincidunt sed tellus ut rutrum
                                         sed vitae justo.
                                     </p>
-                                    <a href="#" class="btn s-full-width"
-                                        >Buy tickets</a
-                                    >
+                                    <button class="btn js-buy-ticket">Buy Tickets</button>
                                 </div>
                             </div>
                             <div class="col col-third s-col-full mt-16">
@@ -169,9 +165,7 @@
                                         Praesent tincidunt sed tellus ut rutrum
                                         sed vitae justo.
                                     </p>
-                                    <a href="#" class="btn s-full-width"
-                                        >Buy tickets</a
-                                    >
+                                    <button class="btn js-buy-ticket">Buy Tickets</button>
                                 </div>
                             </div>
                         </div>
@@ -264,9 +258,9 @@
             </div>
         </div>
 
-        <div class="modal">
-            <div class="modal-container">
-                <div class="modal-close">
+        <div class="modal js-modal">
+            <div class="modal-container js-modal-container">
+                <div class="modal-close js-modal-close">
                     <i class="ti-close"></i>
                 </div>
 
@@ -340,6 +334,54 @@
                     }
                 };
             }
+        </script>
+
+        <script>
+            const buyBtns = document.querySelectorAll('.js-buy-ticket')
+            const modal = document.querySelector('.js-modal')
+            const modalClose = document.querySelector('.js-modal-close')
+            const modalContainer = document.querySelector('.js-modal-container')
+
+            //Hàm hiện thị modal mua vé
+            function showBuyTickets() {
+                modal.classList.add('open')
+            }
+
+            //Hàm ẩn modal mua vé
+
+            function hideBuyTickets() {
+                modal.classList.remove('open')
+            }
+
+            //Lập qua từng thẻ button và nghe hành vi click
+
+            for (const buyBtn of buyBtns) {
+                buyBtn.addEventListener('click', showBuyTickets)
+            }
+
+            //Nghe hành vi click vào button close
+
+            modalClose.addEventListener('click', hideBuyTickets)
+            modal.addEventListener('click', showBuyTickets)
+            modalContainer.addEventListener('click', function (event) {
+                event.stopPropagation()
+            })
+        </script>
+
+        <script>
+            function changeImg() {
+                
+                const image = [
+                    'url("1.jpg")',
+                    'url("2.jpg")',
+                    'url("3.jpg")',
+                ];
+
+                const section = document.querySelector('#slider');
+                const bg = image[Math.floor(Math.random() * image.length)];
+                section.style.backgroundImage = bg;
+            };
+            setInterval(changeImg,2000);    
         </script>
     </body>
 </html>
